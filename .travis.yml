@@ -13,3 +13,13 @@ script:
   - echo $SCAN_ID
   - printf "Scan was started with ID https://nexploit.app/scans/$SCAN_ID\n"
   - printf "Wait for issues ⏳\n"
+  - >
+    (nexploit-cli scan:polling
+    --interval 30s
+    --timeout 20m
+    --token $NEXPLOIT_TOKEN
+    --breakpoint medium_issue $SCAN_ID)
+allow_failure: true
+after_script:
+  - nexploit-cli scan:stop --token $NEXPLOIT_TOKEN $SCAN_ID
+
