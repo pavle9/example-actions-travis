@@ -12,7 +12,7 @@ script:
     --smart)
   - echo $SCAN_ID
   - printf "Scan was started with ID https://nexploit.app/scans/$SCAN_ID\n"
-  - printf "Wait for issues ⏳\n"
+  - printf "Wait for issues ⏳\n "
   - >
     (nexploit-cli scan:polling
     --interval 30s
