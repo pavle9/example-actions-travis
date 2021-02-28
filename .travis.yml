@@ -4,7 +4,7 @@ node_js:
 before_script:
   - npm install @neuralegion/nexploit-cli -g || true
 script:
-  - echo "Start Nexploit Scan 🏁"
+  - printf "Start Nexploit Scan 🏁"
   - >
    SCAN_ID=$(nexploit-cli scan:run --token $NEXPLOIT_TOKEN
    --name "Test Travis Scan"
@@ -21,6 +21,6 @@ script:
     --breakpoint medium_issue $SCAN_ID)
 allow_failure: true
 after_script:
-  - echo "Stop Scan 🛑" 
+  - printf "Stop Scan 🛑" 
   - nexploit-cli scan:stop --token $NEXPLOIT_TOKEN $SCAN_ID
 
