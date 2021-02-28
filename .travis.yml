@@ -3,7 +3,7 @@ node_js:
   - 7
 test:
   before_script:
-      - npm install @neuralegion/nexploit-cli -g || true
+    - npm install @neuralegion/nexploit-cli -g || true
   script:
     - echo "Start Nexploit Scan 🏁"
     - >
