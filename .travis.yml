@@ -6,7 +6,8 @@ before_script:
 script:
   - printf "Start Nexploit Scan 🏁"
   - >
-   SCAN_ID=$(nexploit-cli scan:run --token $NEXPLOIT_TOKEN
+   SCAN_ID=$(nexploit-cli scan:run 
+   --token $NEXPLOIT_TOKEN
    --name "Test Travis Scan"
    --crawler https://juice-shop.herokuapp.com/
    --smart)
