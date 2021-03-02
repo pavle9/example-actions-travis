@@ -10,7 +10,6 @@ script:
    --name "Test Travis Scan"
    --crawler https://juice-shop.herokuapp.com/
    --smart)
-  - echo $SCAN_ID
   - printf "Scan was started with ID https://nexploit.app/scans/$SCAN_ID\n"
   - printf "Wait for issues ⏳\n"
   - >
