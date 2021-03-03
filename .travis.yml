@@ -8,8 +8,7 @@ script:
   - >
     NEW_SCAN_ID=$(nexploit-cli scan:retest
     --token=$NEXPLOIT_TOKEN 
-    $OLD_SCAN_ID
-    )
+    $OLD_SCAN_ID)
   - printf "Scan was started with ID https://nexploit.app/scans/$NEW_SCAN_ID\n"
   - printf "Wait for issues ⏳\n"
   - >
