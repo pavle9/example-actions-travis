@@ -2,13 +2,21 @@ language: node_js
 node_js:
   - 10
 before_script:
+  - sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  - sudo chmod +x /usr/local/bin/docker-compose
   - npm install @neuralegion/nexploit-cli -g || true
 script:
+  - printf "NEXPLOIT_TOKEN=$NEXPLOIT_TOKEN\nREPEATER=$REPEATER\n" > .env
+  - cat .env
+  - docker-compose --env-file=.env up -d
+  - docker-compose config
   - printf "Start Nexploit Scan 🏁"
   - >
-   SCAN_ID=$(nexploit-cli scan:run --token $NEXPLOIT_TOKEN
+   SCAN_ID=$(nexploit-cli scan:run 
+   --token $NEXPLOIT_TOKEN
+   --repeater $REPEATER
    --name "Test Travis Scan"
-   --crawler https://juice-shop.herokuapp.com/
+   --crawler http://juiceshop.local:3000
    --smart)
   - echo $SCAN_ID
   - printf "Scan was started with ID https://nexploit.app/scans/$SCAN_ID\n"
