@@ -4,23 +4,22 @@ node_js:
 before_script:
   - npm install @neuralegion/nexploit-cli -g || true
 script:
-  - printf "Start Nexploit Scan 🏁"
+  - printf "Retest a scan"
   - >
-   SCAN_ID=$(nexploit-cli scan:run 
-   --token $NEXPLOIT_TOKEN
-   --name "Test Travis Scan"
-   --crawler https://juice-shop.herokuapp.com/
-   --smart)
-  - printf "Scan was started with ID https://nexploit.app/scans/$SCAN_ID\n"
+    NEW_SCAN_ID=$(nexploit-cli scan:retest
+    --token=$NEXPLOIT_TOKEN 
+    $OLD_SCAN_ID
+    )
+  - printf "Scan was started with ID https://nexploit.app/scans/$NEW_SCAN_ID\n"
   - printf "Wait for issues ⏳\n"
   - >
     (nexploit-cli scan:polling
     --interval 30s
     --timeout 20m
     --token $NEXPLOIT_TOKEN
-    --breakpoint medium_issue $SCAN_ID)
+    --breakpoint medium_issue $NEW_SCAN_ID)
 allow_failure: true
 after_script:
   - printf "Stop Scan 🛑" 
-  - nexploit-cli scan:stop --token $NEXPLOIT_TOKEN $SCAN_ID
+  - nexploit-cli scan:stop --token $NEXPLOIT_TOKEN $NEW_SCAN_ID
 
