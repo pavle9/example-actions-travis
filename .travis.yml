@@ -9,7 +9,7 @@ script:
    SCAN_ID=$(nexploit-cli scan:run 
    --token $NEXPLOIT_TOKEN
    --name "Test Travis Scan"
-   --crawler https://juice-shop.herokuapp.com/
+   --crawler https://brokencrystals.com
    --smart)
   - printf "Scan was started with ID https://nexploit.app/scans/$SCAN_ID\n"
   - printf "Wait for issues ⏳\n"
