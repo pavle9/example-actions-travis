@@ -8,7 +8,7 @@ script:
   - >
    SCAN_ID=$(nexploit-cli scan:run 
    --token $NEXPLOIT_TOKEN
-   --name "Test Travis Scan"
+   --name "Test TravisCI"
    --crawler https://brokencrystals.com
    --smart)
   - printf "Scan was started with ID https://nexploit.app/scans/$SCAN_ID\n"
@@ -16,7 +16,7 @@ script:
   - >
     (nexploit-cli scan:polling
     --interval 30s
-    --timeout 20m
+    --timeout 10m
     --token $NEXPLOIT_TOKEN
     --breakpoint medium_issue $SCAN_ID)
 allow_failure: true
