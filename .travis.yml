@@ -12,7 +12,7 @@ script:
  - >
   SCAN_ID=$(nexploit-cli scan:run
   --token $NEXPLOIT_TOKEN
-  --name "scan with repeater"
+  --name "scan with repeater1"
   --repeater $REPEATER
   --crawler http://brokencrystals.com
   --smart)
