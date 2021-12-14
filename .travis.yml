@@ -14,7 +14,7 @@ script:
   --token $NEXPLOIT_TOKEN
   --name "Test Travis Scan"
   --repeater $REPEATER
-  --crawler http://brokencrystals.com
+  --crawler https://brokencrystals.com
   --smart)
  - printf "Scan was started with ID https://app.neuralegion.com/scans/$SCAN_ID\n"
  - printf "Wait for issues ⏳\n"
