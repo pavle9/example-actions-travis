@@ -1,9 +1,15 @@
 language: node_js
 node_js:
  - 10
+services:
+ - docker
+ env:
+ - DOCKER_COMPOSE_VERSION=1.4.2
 before_script:
- - sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
- - sudo chmod +x /usr/local/bin/docker-compose
+ - sudo rm /usr/local/bin/docker-compose
+ - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+ - chmod +x docker-compose
+ - sudo mv docker-compose /usr/local/bin
  - npm install @neuralegion/nexploit-cli -g || true
 script:
  - printf "NEXPLOIT=$NEXPLOIT_TOKEN\nREPEATER=$REPEATER\n" > .env
