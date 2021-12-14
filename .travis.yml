@@ -13,7 +13,7 @@ script:
   - printf "Start Nexploit Scan 🏁"
   - >
    PID_REPEATER=$(nexploit-cli repeater --id $REPEATER --token $NEXPLOIT_TOKEN)
-   -echo $PID_REPEATER
+   - echo $PID_REPEATER
    SCAN_ID=$(nexploit-cli scan:run 
    --token $NEXPLOIT_TOKEN
    --repeater $REPEATER
