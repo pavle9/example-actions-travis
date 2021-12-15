@@ -16,7 +16,7 @@ script:
    --token $NEXPLOIT_TOKEN
    --repeater $REPEATER
    --name "Scan with repeater"
-   --crawler https://brokencrystals.local
+   --crawler https://brokencrystals.com/
    --smart)
   - echo $SCAN_ID
   - printf "Scan was started with ID https://nexploit.app/scans/$SCAN_ID\n"
