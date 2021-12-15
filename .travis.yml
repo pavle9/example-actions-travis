@@ -13,7 +13,7 @@ script:
   SCAN_ID=$(nexploit-cli scan:run
   --token $NEXPLOIT_TOKEN
   --name "scan with repeater"
-  --id $REPEATER
+  --repeater $REPEATER
   --crawler http://brokencrystals.com
   --smart)
  - printf "Scan was started with ID https://app.neuralegion.com/scans/$SCAN_ID\n"
