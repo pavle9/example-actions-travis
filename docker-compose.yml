@@ -1,11 +1,9 @@
 version: '3'
 services:
- brokencrystals.local:
-  image: neuralegion/brokencrystals
- repeater:
-  image: neuralegion/repeater:latest
-  restart: always
-  environment:
-   REPEATER_TOKEN: ${NEXPLOIT_TOKEN}
-   REPEATER: ${REPEATER}
-   DEBUG: nexploit-cli
+  repeater:
+    image: neuralegion/repeater:latest
+    restart: always
+    environment:
+      REPEATER_TOKEN: $NEXPLOIT_TOKEN
+      REPEATER_AGENT: $REPEATER
+      DEBUG: nexploit-cli
