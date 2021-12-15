@@ -1,31 +1,33 @@
 language: node_js
 node_js:
- - 10
+  - 10
 before_script:
- - npm install @neuralegion/nexploit-cli -g || true
+  - sudo curl -L "https://github.com/docker/compose/releases/download/1.26.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  - sudo chmod +x /usr/local/bin/docker-compose
+  - npm install @neuralegion/nexploit-cli -g || true
 script:
-  nexploit-cli repeater 
-  --token $NEXPLOIT_TOKEN
-  --id $REPEATER 
-  --bus amqps://amq.app.neuralegion.com:5672 
- - printf "Start Nexploit Scan 🏁"
- - >
-  SCAN_ID=$(nexploit-cli scan:run
-  --token $NEXPLOIT_TOKEN
-  --name "Test Travis Scan"
-  --repeater $REPEATER
-  --crawler https://brokencrystals.com
-  --smart)
- - printf "Scan was started with ID https://app.neuralegion.com/scans/$SCAN_ID\n"
- - printf "Wait for issues ⏳\n"
- - >
-   nexploit-cli scan:polling
-   --interval 30s
-   --timeout 20m
+  - printf "NEXPLOIT_TOKEN=$NEXPLOIT_TOKEN\nREPEATER=$REPEATER\n" > .env
+  - cat .env
+  - docker-compose --env-file=.env up -d
+  - docker-compose config
+  - printf "Start Nexploit Scan 🏁"
+  - >
+   SCAN_ID=$(nexploit-cli scan:run 
    --token $NEXPLOIT_TOKEN
-   --breakpoint medium_issue $SCAN_ID
+   --repeater $REPEATER
+   --name "Test Travis Scan"
+   --crawler http://juiceshop.local:3000
+   --smart)
+  - echo $SCAN_ID
+  - printf "Scan was started with ID https://nexploit.app/scans/$SCAN_ID\n"
+  - printf "Wait for issues ⏳\n"
+  - >
+    (nexploit-cli scan:polling
+    --interval 30s
+    --timeout 20m
+    --token $NEXPLOIT_TOKEN
+    --breakpoint medium_issue $SCAN_ID)
 allow_failure: true
 after_script:
- - printf "Stop Scan 🛑"
- - nexploit-cli scan:stop 
- --token $NEXPLOIT_TOKEN $SCAN_ID
+  - printf "Stop Scan 🛑" 
+  - nexploit-cli scan:stop --token $NEXPLOIT_TOKEN $SCAN_ID
