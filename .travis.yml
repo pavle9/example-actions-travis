@@ -12,7 +12,7 @@ script:
   - docker-compose config
   - printf "Start Nexploit Scan 🏁"
   - >
-   SCAN_ID=$(nexploit-cli scan:run 
+   SCAN_ID=$(nexploit-cli scan:run
    --token $NEXPLOIT_TOKEN
    --repeater $REPEATER
    --name "Scan with repeater"
