@@ -24,7 +24,7 @@ script:
   - >
     (nexploit-cli scan:polling
     --interval 30s
-    --timeout 20m
+    --timeout 10m
     --token $NEXPLOIT_TOKEN
     --breakpoint medium_issue $SCAN_ID)
 allow_failure: true
